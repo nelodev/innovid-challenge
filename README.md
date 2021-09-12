@@ -3,20 +3,24 @@
 # Innovid challenge: Load balancer
 Tenemos que crear una aplicación que muestre la carga de nuestros servidores 1, 2, 3 y 4, lamentablemente nuestro backend no tiene implementado un método para obtenerlos todos al mismo tiempo así que hay que traerlos de a uno, en paralelo.
 
-## API
-* GET https://localhost:8000/status/:id -> Obtiene la carga de un servidor
-
-> El código de la API no debe ser modificado.
-
 ## Frontend
 * Debe mostrar la carga de los cuatro servidores.
 * La carga se debe actualizar cada 5 segundos.
 * Puedo prender y apagar servidores (dejo de traerme su carga).
 
-> TODO el código de la aplicación frontend puede ser modificado.
-> El proyecto incluye SASS y [98.css](https://jdan.github.io/98.css) para usar a disposición, los assets se encuentran en la carpeta `assets` dentro del proyecto del cliente.
+### Extra
 
-![Ejemplo](./assets/spec.png "Ejemplo")
+* Botones para encender/apagar todos los servidores a la vez
+* Botón para añadir servidores
+* Botones para resetear a estado inicial/eliminar todos
+* Capacidad máxima configurable para apagar servidor si carga lleva a dicho nivel
+
+### WIP
+* Añadir tests (al ser un challenge no se ha considerado importante, aunque debería serlo)
+* Revisar errores Typescript confusos
+* Añadir funcionalidades a los botones de ventana
+
+![Challenge](./assets/challenge.png "Challenge")
 
 ## Corriendo el proyecto
 ```bash
