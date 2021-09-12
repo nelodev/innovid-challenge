@@ -8,10 +8,12 @@ import pcOn from "../assets/pc-on.gif";
 
 type ServerProps = {
   id: number;
+  isActive: boolean;
+  setIsActive: (isActive: boolean) => void;
+  onCloseServer: (serverId: number) => void;
 };
 
-export const Server = ({id}: ServerProps) => {
-  const [isActive, setIsActive] = useState(false);
+export const Server = ({id, isActive, setIsActive, onCloseServer}: ServerProps) => {
   const [serverLoad, setServerLoad] = useState(0);
   const [errorText, setErrorText] = useState(null);
   const interval = useRef("");
@@ -36,6 +38,17 @@ export const Server = ({id}: ServerProps) => {
       clearTimeout(timeout.current);
     }
   }, [errorText]);
+
+  useEffect(() => {
+    if (isActive) {
+      interval.current = setInterval(() => {
+        getServerLoad();
+      }, 5000);
+    } else {
+      clearInterval(interval.current);
+      setServerLoad(0);
+    }
+  }, [isActive]);
 
   const getServerLoad = async () => {
     const result = await fetch(`http://localhost:8000/status/${id}`);
@@ -71,7 +84,7 @@ export const Server = ({id}: ServerProps) => {
           <div className="title-bar-controls">
             <button aria-label="Minimize" />
             <button aria-label="Maximize" />
-            <button aria-label="Close" />
+            <button aria-label="Close" onClick={() => onCloseServer(id)} />
           </div>
         </div>
         <div className="window-body">

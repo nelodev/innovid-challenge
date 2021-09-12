@@ -21,3 +21,20 @@
   padding: 1em;
   margin-bottom: 3em;
 }
+
+.buttonsContainer {
+  padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.rightButtonsContainer {
+  button {
+    margin-left: 2em;
+  }
+}
+
+.secretMessage {
+  padding: 3em;
+}
