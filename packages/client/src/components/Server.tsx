@@ -1,6 +1,7 @@
 import * as React from "react";
-import {useState, useRef} from "react";
+import {useState, useRef, useEffect} from "react";
 
+import config from "../config.js";
 import styles from "../components/Server.module.scss";
 import pcOff from "../assets/pc-off.png";
 import pcOn from "../assets/pc-on.gif";
@@ -12,7 +13,29 @@ type ServerProps = {
 export const Server = ({id}: ServerProps) => {
   const [isActive, setIsActive] = useState(false);
   const [serverLoad, setServerLoad] = useState(0);
-  const interval = useRef(null);
+  const [errorText, setErrorText] = useState(null);
+  const interval = useRef("");
+  const timeout = useRef("");
+
+  useEffect(() => {
+    if (serverLoad > config.maxServerLoad) {
+      setErrorText(
+        `🚨 Server ${id} has excedeed max server load of ${config.maxServerLoad}% with ${serverLoad}%. Shutting down... 🚨`,
+      );
+      timeout.current = setTimeout(() => {
+        setErrorText("");
+        setServerLoad(0);
+        clearInterval(interval.current);
+        setIsActive(false);
+      }, 2000);
+    }
+  }, [serverLoad]);
+
+  useEffect(() => {
+    if (!errorText && isActive) {
+      clearTimeout(timeout.current);
+    }
+  }, [errorText]);
 
   const getServerLoad = async () => {
     const result = await fetch(`http://localhost:8000/status/${id}`);
@@ -73,6 +96,16 @@ export const Server = ({id}: ServerProps) => {
           </p>
         </div>
       </div>
+      {errorText ? (
+        <div
+          className={`window ${errorText ? styles.errorText : ""}`}
+          style={{width: 320, margin: "auto"}}
+        >
+          {errorText ? errorText : ""}
+        </div>
+      ) : (
+        ""
+      )}
     </main>
   );
 };
