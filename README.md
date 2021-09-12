@@ -15,7 +15,7 @@ Tenemos que crear una aplicación que muestre la carga de nuestros servidores 1,
 * Botones para resetear a estado inicial/eliminar todos
 * Capacidad máxima configurable para apagar servidor si carga lleva a dicho nivel
 
-### WIP
+### Roadmap
 * Añadir tests (al ser un challenge no se ha considerado importante, aunque debería serlo)
 * Revisar errores Typescript confusos
 * Añadir funcionalidades a los botones de ventana
