@@ -28,8 +28,16 @@ export const Server = ({id}: ServerProps) => {
       }, 5000);
     } else {
       clearInterval(interval.current);
+      setServerLoad(0);
     }
     setIsActive(!isActive);
+  };
+
+  const getServerLoadRiskClass = () => {
+    if (serverLoad >= 75) return styles.highRisk;
+    if (serverLoad >= 50) return styles.mediumRisk;
+
+    return styles.lowRisk;
   };
 
   return (
@@ -60,7 +68,9 @@ export const Server = ({id}: ServerProps) => {
           >
             turn {isActive ? "off" : "on"}
           </a>
-          <p className="status-bar-field">CPU Usage: {serverLoad}%</p>
+          <p className="status-bar-field">
+            CPU Usage: <span className={getServerLoadRiskClass()}>{serverLoad}%</span>
+          </p>
         </div>
       </div>
     </main>
