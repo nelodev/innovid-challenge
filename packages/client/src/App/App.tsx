@@ -8,12 +8,7 @@ import styles from "./App.module.scss";
 
 const App: React.FC = () => {
   const [showSecretMessage, setShowSecretMessage] = useState(false);
-  const [servers, setServers] = useState([
-    {id: 1, isActive: false},
-    {id: 2, isActive: false},
-    {id: 3, isActive: false},
-    {id: 4, isActive: false},
-  ]);
+  const [servers, setServers] = useState(config.defaultServers);
 
   const addServer = () => {
     if (servers.length === 9) {
@@ -64,8 +59,16 @@ const App: React.FC = () => {
           </div>
         ) : null}
         <div className={styles.rightButtonsContainer}>
-          <button onClick={() => updateAllServers(true)}>Turn on all servers</button>
-          <button onClick={() => updateAllServers(false)}>Turn off all servers</button>
+          <button disabled={!servers.length} onClick={() => updateAllServers(true)}>
+            Turn on all servers
+          </button>
+          <button disabled={!servers.length} onClick={() => updateAllServers(false)}>
+            Turn off all servers
+          </button>
+          <button onClick={() => setServers(config.defaultServers)}>♻️ RESET</button>
+          <button disabled={!servers.length} onClick={() => setServers([])}>
+            🚨 BOOM 🚨
+          </button>
         </div>
       </div>
       <div className={styles.serversContainer}>
