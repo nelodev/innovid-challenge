@@ -39,6 +39,6 @@ npm start
 
 ## Contacto
 
-🟣 Twitch: nelodev
-🔵 Discord: nelodev#7264
-📧 Contacto: correo@nelo.dev
+- 🟣 Twitch: nelodev
+- 🔵 Discord: nelodev#7264
+- 📧 Contacto: correo@nelo.dev
