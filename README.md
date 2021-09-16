@@ -36,3 +36,9 @@ npm start
 
 ## Modalidad de entrega
 * Repositorio público subido a GitHub, Gitlab, Bitbucket.
+
+## Contacto
+
+🟣 Twitch: nelodev
+🔵 Discord: nelodev#7264
+📧 Contacto: correo@nelo.dev
